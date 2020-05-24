@@ -17,8 +17,8 @@ time.sleep(3)
 driver.get('https://esia.gosuslugi.ru/')
 time.sleep(3)
 # учетка
-phone = '89647289222'
-my_password = 'EvRf1993:'
+phone = ''
+my_password = ''
 # поиск тегов по имени, ввод
 driver.find_element(By.ID, "mobileOrEmail").send_keys(phone)
 time.sleep(3)
