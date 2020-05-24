@@ -34,11 +34,22 @@ required_html = driver.page_source
 soup = BeautifulSoup(required_html, 'html5lib')
 
 result = []
+names = soup.find_all('div', {'class': 'col span_3 push_1 dt'})
+values = soup.find_all('div', {'class': 'col span_6 dd'})
+for name in names:
+    print(name.find('div', {'class': 'col span_3 push_1 dt'}).text.strip())
+    for value in values:
+        print(value.find('div', {'class': 'col span_6 dd'}).text.strip())
 
-first = soup.find('div', {'class': 'col span_3 push_1 dt'}).text
-second = soup.find('div', {'class': 'col span_6 dd'}).text
-print(first)
-print(second)
+
+print(names)
+print(values)
+
+# first = soup.find_all('div', {'class': 'col span_3 push_1 dt'})
+# second = soup.find_all('div', {'class': 'col span_6 dd'})
+# print(first)
+# print(second)
+
 # парсим сайт
 
 
