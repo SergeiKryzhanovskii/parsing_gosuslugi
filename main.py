@@ -11,44 +11,37 @@ chromedriver = ('chromedriver.exe')
 options = webdriver.ChromeOptions()
 # запуск в хроме
 driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
-# pause
-time.sleep(3)
 # переход на страницу входа
 driver.get('https://esia.gosuslugi.ru/')
-time.sleep(3)
+time.sleep(1.5)
 # учетка
-phone = '89647289222'
-my_password = 'EvRf1993:'
+phone = ''
+my_password = ''
 # поиск тегов по имени, ввод
 driver.find_element(By.ID, "mobileOrEmail").send_keys(phone)
-time.sleep(3)
+time.sleep(1.5)
 driver.find_element(By.ID, "password").send_keys(my_password)
-time.sleep(3)
+time.sleep(1.5)
 # вход
 driver.find_element(By.CSS_SELECTOR, "button").click()
 # переход на страницу с данными в обход предполагаемых сообщений
 driver.get('https://esia.gosuslugi.ru/profile/user/personal')
+required_html = driver.get('https://esia.gosuslugi.ru/profile/rs/prns/?embed=(documents.elements,addresses.elements,vehicles.elements,kids.elements)')
 # получаем страницу
-required_html = driver.page_source
+#required_html = driver.page_source
 # передаем в конструктор BS
-soup = BeautifulSoup(required_html, 'html5lib')
+soup = BeautifulSoup(required_html.text, 'html.parser')
 
-result = []
-names = soup.find_all('div', {'class': 'col span_3 push_1 dt'})
-values = soup.find_all('div', {'class': 'col span_6 dd'})
-for name in names:
-    print(name.find('div', {'class': 'col span_3 push_1 dt'}).text.strip())
-    for value in values:
-        print(value.find('div', {'class': 'col span_6 dd'}).text.strip())
+parameters_list = soup.find('div', {'class': 'col span_3 push_1 dt'})
+parameters_list_items = parameters_list.find_all()
+for parameters in parameters_list_items:
+    print(parameters.prettify())
 
 
-print(names)
-print(values)
 
 # first = soup.find_all('div', {'class': 'col span_3 push_1 dt'})
 # second = soup.find_all('div', {'class': 'col span_6 dd'})
-# print(first)
-# print(second)
+
 
 # парсим сайт
 
@@ -61,9 +54,9 @@ print(values)
 
 
 # press button
-driver.find_element(By.CSS_SELECTOR, "button").click()
+#driver.find_element(By.CSS_SELECTOR, "button").click()
 # поиск элемента
-elements = driver.find_elements(By.TAG_NAME, 'p')
+#elements = driver.find_elements(By.TAG_NAME, 'p')
 
 # добавить выход из аккаунта
 # создать файл, если его еще нет и внести данные

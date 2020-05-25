@@ -1,37 +1,57 @@
-# код для html, тест
-
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 from bs4 import BeautifulSoup
-def parse_user_datafile_bs(filename):
-    results = []
-    text = read_file(filename)
+import html5lib
+import json
 
-    soup = BeautifulSoup(text)
-    film_list = film_list = soup.find('div', {'class': 'profileFilmsList'})
-    items = film_list.find_all('div', {'class': ['item', 'item even']})
-    for item in items:
-        # getting movie_id
-        movie_link = item.find('div', {'class': 'nameRus'}).find('a').get('href')
-        movie_desc = item.find('div', {'class': 'nameRus'}).find('a').text
-        movie_id = re.findall('\d+', movie_link)[0]
 
-        # getting english name
-        name_eng = item.find('div', {'class': 'nameEng'}).text
 
-        #getting watch time
-        watch_datetime = item.find('div', {'class': 'date'}).text
-        date_watched, time_watched = re.match('(\d{2}\.\d{2}\.\d{4}), (\d{2}:\d{2})', watch_datetime).groups()
 
-        # getting user rating
-        user_rating = item.find('div', {'class': 'vote'}).text
-        if user_rating:
-            user_rating = int(user_rating)
+# путь к драйверу хром
+chromedriver = ('chromedriver.exe')
+options = webdriver.ChromeOptions()
+# запуск в хроме
+driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
+# переход на страницу входа
+driver.get('https://esia.gosuslugi.ru/')
+time.sleep(1.5)
+# учетка
+phone = ''
+my_password = ''
+# поиск тегов по имени, ввод
+driver.find_element(By.ID, "mobileOrEmail").send_keys(phone)
+time.sleep(1.5)
+driver.find_element(By.ID, "password").send_keys(my_password)
+time.sleep(1.5)
+# вход
+driver.find_element(By.CSS_SELECTOR, "button").click()
+# переход на страницу с данными в обход предполагаемых сообщений
+driver.get('https://esia.gosuslugi.ru/profile/user/personal')
+driver.get('https://esia.gosuslugi.ru/profile/rs/prns/?embed=(documents.elements,addresses.elements,vehicles.elements,kids.elements)')
+# получаем страницу
+required_html = driver.page_source
 
-        results.append({
-                'movie_id': movie_id,
-                'name_eng': name_eng,
-                'date_watched': date_watched,
-                'time_watched': time_watched,
-                'user_rating': user_rating,
-                'movie_desc': movie_desc
-            })
-    return results
+# передаем в конструктор BS
+soup = BeautifulSoup(required_html, 'lxml')
+res = soup.pre.text
+print(res)
+r = json.loads(res)
+print(type(r))
+for key, value in r.items():
+  print("{0}: {1}".format(key, value))
+
+# парсим сайт
+
+
+# закрыть окно
+
+
+# press button
+# driver.find_element(By.CSS_SELECTOR, "button").click()
+# поиск элемента
+# elements = driver.find_elements(By.TAG_NAME, 'p')
+
+# добавить выход из аккаунта
+# создать файл, если его еще нет и внести данные
