@@ -1,3 +1,5 @@
+# -*- python3/ utf-8 -*-
+
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,7 +9,7 @@ import json
 
 
 def init_driver():
-    ''' Инициируется браузер через Selenium '''
+    """ Инициируется браузер через Selenium """
     chromedriver = ('chromedriver.exe')  # путь к драйверу хром
 
     ''' Если требуется запуск бе UI, то нужно раскомментировать "headless" '''
