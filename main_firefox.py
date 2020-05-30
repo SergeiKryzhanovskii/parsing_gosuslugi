@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 import json
+import getpass
 
 
 def init_driver():
@@ -61,7 +62,7 @@ def get_data():
 
 if __name__ == '__main__':
     login = input('Please, enter phone or email: ').split()
-    my_password = input('Please, enter password: ').split()
+    my_password = getpass.getpass('Please, enter password: ').split()
     driver = init_driver()
     login_gos()
     get_data()
