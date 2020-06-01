@@ -52,7 +52,7 @@ When you run the programm in PyCharm - she may stop at the password entry step.
 This is a feature of the library`getpass`.
 To run in PyCharm you need to uncomment the line:
 ```python
-my_password = input('Please, enter phone or email: ').split()
+my_password = input('Please, enter password: ').split()
 ```
 and comment out the line:
 
