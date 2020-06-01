@@ -60,7 +60,7 @@ def get_data():
 
 if __name__ == '__main__':
     login = input('Please, enter phone or email: ').split()
-    # my_password = input('Please, enter phone or email: ').split() # read README.md ('Command line & PyCharm')
+    # my_password = input('Please, enter password: ').split() # read README.md ('Command line & PyCharm')
     my_password = getpass.getpass('Please, enter password: ').split()
     driver = init_driver()
     login_gos()
