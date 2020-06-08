@@ -14,7 +14,7 @@ def init_driver():
     """ Emulate the user's browser """
     firefoxdriver = ('geckodriver.exe')  # path for a geckodriver
     options = Options()
-    #options.headless = True # headless (browser starts without a graphical interface)
+    # options.headless = True # headless (browser starts without a graphical interface)
     driver = webdriver.Firefox(executable_path=firefoxdriver, firefox_options=options)
     return driver
 
@@ -56,13 +56,13 @@ def get_data():
 
     '''  Output data to a file '''
     with open('out.txt', 'w', encoding='utf-8') as out:
-      for key, val in result.items():
-        out.write('{}:{}\n'.format(key, val))
+        for key, val in result.items():
+            out.write('{}:{}\n'.format(key, val))
 
 
 if __name__ == '__main__':
     login = input('Please, enter phone or email: ').split()
-    #my_password = input('Please, enter password: ').split() # read README.md ('Command line & PyCharm')
+    # my_password = input('Please, enter password: ').split() # read README.md ('Command line & PyCharm')
     my_password = getpass.getpass('Please, enter password: ').split()
     driver = init_driver()
     login_gos()
