@@ -20,7 +20,7 @@
 ### Result
 1. Using Selenium to emulate browser and error handling;
 2. Parse data:
-	1.  Go to your personal account to download data;
+	1. Go to your personal account to download data;
 	2. Go to web page with personal data (previously obtained through developer mode in browser);
 	3. Parsim using beautifulsoup4;
 	4. Decode with json.
